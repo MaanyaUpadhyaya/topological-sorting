@@ -1,0 +1,24 @@
+#include <stdio.h> 
+#include <stdlib.h>
+#include <time.h> 
+int count=0,visited[10]={0},n,a[10][10],k=0,pop[10]; 
+void dfs(int v) { 
+int w; 
+count++; visited[v]=count; for(w=1;w<=n;w++) 
+if(a[v][w]==1 && visited[w]==0) 
+dfs(w); 
+pop[k++]=v; } 
+int main() { 
+int v,i,j; 
+printf("Enter the number of vertices: ");
+scanf("%d",&n); 
+printf("Enter the adjacency matrix:\n"); for(i=1;i<n+1;i++) 
+for(j=1;j<n+1;j++) scanf("%d",&a[i][j]); 
+clock_t start,end; double t; start=clock(); for(v=1;v<=n;v++) 
+{ 
+if(visited[v]==0) dfs(v); 
+} 
+end=clock(); t=(double)(end-start)/CLOCKS_PER_SEC; printf("The topological sorting order is:\n"); for(i=k-1;i>=0;i--) 
+printf("%d\t",pop[i]);
+printf("\nTime taken = %f seconds\n",t); 
+return 0; } 
